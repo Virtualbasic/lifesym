@@ -12,7 +12,8 @@ class AppSymulation:
         self.dirt_position = []
         self.rabb_position = []
         self.fox_position = []
-
+#uzyskiwanie struktury
+#sprawdzanie pozycji
     def get_struct(self, value):
 
         for _lsit in (self.gras_position, self.dirt_position):
