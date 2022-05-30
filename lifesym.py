@@ -52,6 +52,9 @@ class AppSymulation:
                         else:
                             self.dirt_position.append(pos)
 
+    # poruszanie się  lisa  , jeśli lis nie znajdzie królika  wyczyszczenie go z z kratki i wstawie nie w jego miejsce F[d]
+    # jeśli na kratce  lis nie zastanie królika   zostaje przeniesiony na kolejną losową kratke
+    # jeśli zastanie królika zabija go i w miejce krtólika zostaje R[d]
     def move_fox(self, pos, day):
         if self.fox_position:
             if self.m <= 3:
@@ -73,6 +76,13 @@ class AppSymulation:
                 self._data[step[idx]].append('fox')
                 break
 
+    # metoda move rabbit  służy do przenoszenie królika  na najbliższą kratke z kratki na której aktualnie się znajduje
+    # "logika"
+    # kratki zajęte przez innego królika 'rabbit'
+    # kratki zajęte przez martwe zwierzę 'R[d], F[d]
+    # podst struktura danych [kratka z ziemią, kratka z trawą]
+    # obiekty grass_position oraz dirt_position przechowóją indexy danych struktur
+    # monitorowane jest przebywanie królika na kratkach bez pożywienia  wszystkie informacje przekładają się na długość życia królika
     def move_rabbit(self, pos, day):
         if self.gras_position:
             if 0 in self.gras_position:
@@ -119,8 +129,9 @@ class AppSymulation:
                     self._data[self.dirt_position[idx]].append('rabbit')
                     break
 
+    # przegląd siatki
     def view_grid(self, day):
-
+        # kolory siatki
         def set_color(c):
             color = {'fox': '\033[93m',
                      'F[d]': '\033[93m',
@@ -170,6 +181,7 @@ class AppSymulation:
             self.get_struct(self.fox_position[0])
             self.move_fox(self.fox_position[0], day)
 
+    # tworzenie  strukt danych + pozycjonowanie
     def create_data(self):
         s = self.size
         for _x in range(0, s):
